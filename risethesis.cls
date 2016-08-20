@@ -181,6 +181,7 @@
   \gdef\@sectionname{Seção}
   \gdef\@appendixname{Apêndice}
   \gdef\@tocname{Sumário}
+  \gdef\@algorithmname{Algoritmo}
   \newcommand\bibliographytocname{Referências}
   \renewcommand{\bibname}{\bibliographytocname}
   \renewcommand{\appendixtocname}{Apêndice}
@@ -228,6 +229,7 @@
   \gdef\@chaptername{Chapter}
   \gdef\@sectionname{Section}
   \gdef\@tocname{Contents}
+  \gdef\@algorithmname{Algorithm}
   \gdef\@listoftablesname{List of Tables}
   \gdef\@listoffiguresname{List of Figures}
   \renewcommand{\appendixtocname}{Appendix}
@@ -970,3 +972,4 @@ requirements for the degree of \@degree\ in \@majorfielden.
 \newcommand{\corref}[1]{\@corname~\ref{#1}\xspace}
 \newcommand{\propref}[1]{\@propname~\ref{#1}\xspace}
 \newcommand{\pgref}[1]{\@pagename~\pageref{#1}\xspace}
+\newcommand{\algoref}[1]{\@algorithmname~\ref{#1}\xspace}
