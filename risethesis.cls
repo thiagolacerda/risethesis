@@ -149,13 +149,20 @@
 %% Language Dependent
 
 % Portuguese
+% We will reuse this in texttypept, which will be used in the committee page (which should always be in pt-br)
+\gdef\@bachelordissertationpt{Trabalho de Graduação}
+\gdef\@mastersdissertationpt{Dissertação de Mestrado}
+\gdef\@phdqualifyingpt{Monografia de Qualificação}
+\gdef\@phdproposalpt{Proposta de Tese de Doutorado}
+\gdef\@phdthesispt{Tese de Doutorado}
+
 \if\@language0
   \RequirePackage[portuguese]{babel}
-  \gdef\@bachelordissertation{Trabalho de Graduação}
-  \gdef\@mastersdissertation{Dissertação de Mestrado}
-  \gdef\@phdqualifying{Monografia de Qualificação}
-  \gdef\@phdproposal{Proposta de Tese de Doutorado}
-  \gdef\@phdthesis{Tese de Doutorado}
+  \gdef\@bachelordissertation{\@bachelordissertationpt}
+  \gdef\@mastersdissertation{\@mastersdissertationpt}
+  \gdef\@phdqualifying{\@phdqualifyingpt}
+  \gdef\@phdproposal{\@phdproposalpt}
+  \gdef\@phdthesis{\@phdthesispt}
   \gdef\@bachelordegree{Bacharel}
   \gdef\@mastersdegree{Mestre}
   \gdef\@phddegree{Doutor}
@@ -354,6 +361,19 @@
     \@phdthesis
   \fi\fi\fi\fi\fi}
 
+\def\@texttypept{%
+  \if\@degreetype0
+    \@bachelordissertationpt
+  \else\if\@degreetype1
+    \@mastersdissertationpt
+  \else\if\@degreetype2
+    \@phdqualifyingpt
+  \else\if\@degreetype3
+    \@phdproposalpt
+  \else\if\@degreetype4
+    \@phdthesispt
+  \fi\fi\fi\fi\fi}
+
 \def\@degree{%
   \if\@degreetype0
     \@bachelordegree
@@ -367,6 +387,31 @@
     \@phddegree
   \fi\fi\fi\fi\fi}
 
+%% Committee identification
+\def\frstcmtmember#1#2{%
+  \gdef\@frstcmtname{#1}%
+  \gdef\@frstcmtinst{#2}}
+\def\@frstcmtmember{\@notdefined}
+
+\def\scndcmtmember#1#2{%
+  \gdef\@scndcmtname{#1}%
+  \gdef\@scndcmtinst{#2}}
+\def\@scndcmtmember{\@notdefined}
+
+\def\thrdcmtmember#1#2{%
+  \gdef\@thrdcmtname{#1}%
+  \gdef\@thrdcmtinst{#2}}
+\def\@thrdcmtmember{\@notdefined}
+
+\def\frthcmtmember#1#2{%
+  \gdef\@frthcmtname{#1}%
+  \gdef\@frthcmtinst{#2}}
+\def\@frthcmtmember{\@notdefined}
+
+\def\ffthcmtmember#1#2{%
+  \gdef\@ffthcmtname{#1}%
+  \gdef\@ffthcmtinst{#2}}
+\def\@ffthcmtmember{\@notdefined}
 
 \gdef\@presentationtext{%
 \if\@language0
@@ -635,44 +680,47 @@ requirements for the degree of \@degree\ in \@majorfielden.
   \if@openright\cleardoublepage\else\clearpage\fi
   \thispagestyle{empty}
   \noindent
-  Tese de doutorado apresentada por \textbf{\@author} ao programa de Pós-Graduação em
+  % I don't know why but the \@texttypept is adding a tiny extra space on the left. Using hspace as a workaround
+  \hspace{-0.15cm}\@texttypept~apresentada por \textbf{\@author} ao programa de Pós-Graduação em
   Ciência da Computação do Centro de Informática da Universidade Federal de
   Pernambuco, sob o título \textbf{\@title}, orientada pelo \textbf{Prof.
   \@adviser} e aprovada pela banca examinadora formada pelos professores:
-  
+
   \vspace{5\baselineskip}
-  
+
   \begin{center}
-  
+
   -----------------------------------------------------------------------\\
-  Prof. André Luis de Medeiros Santos\\
-  Centro de Informática/UFPE
-  
-  \vspace{\baselineskip}
+  Prof. \@frstcmtname\\
+  \@frstcmtinst
+
+  \vspace{2\baselineskip}
   -----------------------------------------------------------------------\\
-  Prof. Alexandre Marcos Lins de Vasconselos\\
-  Centro de Informática/UFPE
-  
-  \vspace{\baselineskip}
+  Prof. \@scndcmtname\\
+  \@scndcmtinst
+
+  \vspace{2\baselineskip}
   -----------------------------------------------------------------------\\
-  Prof. Christina von Flach Garcia Chavez\\
-  Departamento de Ciência da Computação/UFBA
-  
-  \vspace{\baselineskip}
+  Prof. \@thrdcmtname\\
+  \@thrdcmtinst
+
+  \if\@degreetype4
+  \vspace{2\baselineskip}
   -----------------------------------------------------------------------\\
-  Prof. Leonardo Gresta Paulino Murta\\
-  Instituto de Computação/UFF
-  
-  \vspace{\baselineskip}
+  Prof. \@frthcmtname\\
+  \@frthcmtinst
+
+  \vspace{2\baselineskip}
   -----------------------------------------------------------------------\\
-  Prof. Jones Oliveira de Albuquerque\\
-  Departamento de Estatística e Informática/UFRPE
-  
+  Prof. \@ffthcmtname\\
+  \@ffthcmtinst
+  \fi
+
   \vfill
   \@address
   \\
   \@date
-  
+
   \end{center}
 }
 
