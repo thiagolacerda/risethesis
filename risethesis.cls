@@ -102,7 +102,6 @@
 \RequirePackage[nottoc, notlof, notlot]{tocbibind}
 \RequirePackage{indentfirst}
 \RequirePackage{enumitem}
-\RequirePackage{natbib}
 \RequirePackage{lastpage}
 
 \if\@scr0
@@ -518,8 +517,6 @@ requirements for the degree of \@degree\ in \@majorfielden.
 \newenvironment{references}
 {
 	\backmatter
-	\bibliographystyle{abnt}
-	\setlength{\bibhang}{0pt}
 	\singlespacing % Change to singlespacing for the references
 	\begingroup
 	\raggedright
