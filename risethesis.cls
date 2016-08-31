@@ -154,6 +154,9 @@
 \gdef\@phdqualifyingpt{Monografia de Qualificação}
 \gdef\@phdproposalpt{Proposta de Tese de Doutorado}
 \gdef\@phdthesispt{Tese de Doutorado}
+\gdef\@bachelordegreept{Bacharel}
+\gdef\@mastersdegreept{Mestre}
+\gdef\@phddegreept{Doutor}
 
 \if\@language0
   \RequirePackage[portuguese]{babel}
@@ -162,9 +165,9 @@
   \gdef\@phdqualifying{\@phdqualifyingpt}
   \gdef\@phdproposal{\@phdproposalpt}
   \gdef\@phdthesis{\@phdthesispt}
-  \gdef\@bachelordegree{Bacharel}
-  \gdef\@mastersdegree{Mestre}
-  \gdef\@phddegree{Doutor}
+  \gdef\@bachelordegree{\@bachelordegreept}
+  \gdef\@mastersdegree{\@mastersdegreept}
+  \gdef\@phddegree{\@phddegreept}
   \gdef\@maleadvisertitle{Orientador}
   \gdef\@femaleadvisertitle{Orientadora}
   \gdef\@malecoadvisertitle{Co-Orientador}
@@ -384,6 +387,19 @@
     \@phddegree
   \else\if\@degreetype4
     \@phddegree
+  \fi\fi\fi\fi\fi}
+
+\def\@degreept{%
+  \if\@degreetype0
+    \@bachelordegreept
+  \else\if\@degreetype1
+    \@mastersdegreept
+  \else\if\@degreetype2
+    \@phddegreept
+  \else\if\@degreetype3
+    \@phddegreept
+  \else\if\@degreetype4
+    \@phddegreept
   \fi\fi\fi\fi\fi}
 
 %% Committee identification
@@ -670,16 +686,31 @@ requirements for the degree of \@degree\ in \@majorfielden.
 \def\banca{%
   \if@openright\cleardoublepage\else\clearpage\fi
   \thispagestyle{empty}
-  \noindent
-  % I don't know why but the \@texttypept is adding a tiny extra space on the left. Using hspace as a workaround
-  \hspace{-0.15cm}\@texttypept~apresentada por \textbf{\@author} ao programa de Pós-Graduação em
-  Ciência da Computação do Centro de Informática da Universidade Federal de
-  Pernambuco, sob o título \textbf{\@title}, orientada pelo \textbf{Prof.
-  \@adviser} e aprovada pela banca examinadora formada pelos professores:
-
-  \vspace{5\baselineskip}
+  \vskip 25mm
+  \begin{center}
+  {\Large \@author}
+  \vskip 10mm
+  \begin{center}
+    {\large\bfseries{\MakeUppercase{\@title}}}\\
+  \end{center}
+  \vskip 10mm
+  \begin{flushright}
+    \begin{minipage}{100mm}
+    \@texttypept~apresentada ao programa de Pós-Graduação em Ciência da Computação da Universidade Federal de
+    Pernambuco, como requisito parcial para obtenção do título de \@degreept~em Ciência da Computação.
+    \vskip2\baselineskip
+    \end{minipage}
+  \end{flushright}
+  \vskip 15mm
+  \end{center}
+  Aprovado em: 29/07/2016
+  \vskip 25mm
+  %\vspace{\baselineskip}
 
   \begin{center}
+
+  {\large\bfseries{\MakeUppercase{Banca Examinadora}}}
+  \vspace{3\baselineskip}
 
   -----------------------------------------------------------------------\\
   Prof. \@frstcmtname\\
@@ -706,12 +737,12 @@ requirements for the degree of \@degree\ in \@majorfielden.
   Prof. \@ffthcmtname\\
   \@ffthcmtinst
   \fi
-
   \vfill
-  \@address
-  \\
-  \@date
-
+  \begin{center}
+    \@address
+    \\
+    \@date
+  \end{center}
   \end{center}
 }
 
